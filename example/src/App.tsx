@@ -1,13 +1,13 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { JSONTree } from 'react-json-tree';
 import Annotator from 'react-pdf-ner-annotator';
-import { Entity, IEntityHover } from 'react-pdf-ner-annotator/src/interfaces/entity';
 import { Annotation } from 'react-pdf-ner-annotator/src/interfaces/annotation';
-import { AnnotatorHandle } from 'react-pdf-ner-annotator/src/types';
-import PDFFile from './pdfs/order.pdf';
-import KlassifaiLogo from './klassifai.svg';
-import './App.scss';
+import { Entity, IEntityHover } from 'react-pdf-ner-annotator/src/interfaces/entity';
 import 'react-pdf-ner-annotator/src/scss/style.scss';
+import { AnnotatorHandle } from 'react-pdf-ner-annotator/src/types';
+import './App.scss';
+import KlassifaiLogo from './klassifai.svg';
+import PDFFile from './pdfs/order.pdf';
 
 const defaultAnnotations: Array<Annotation> = [{
   'id': 4,
