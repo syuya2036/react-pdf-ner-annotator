@@ -1,9 +1,26 @@
-# 動かし方
+# react-pdf-ner-annotator
 
-デフォルトのdocは以下の場所にある．
-- [react-pdf-ner-annotator](#react-pdf-ner-annotator)
+## 動作環境
 
-## 1
+### os
+```bash
+-> % sw_vers
+ProductName:            macOS
+ProductVersion:         15.3.2
+BuildVersion:           24D81
+```
+### node
+
+```bash
+-> % node -v
+v22.14.0
+-> % npm --version
+11.2.0
+```
+
+## 動かし方
+
+### 1
 ```bash
 cd example
 npm install
@@ -11,7 +28,7 @@ npm run build
 ```
 するとエラーが起こるが，想定挙動なので次へ．
 
-## 2
+### 2
 
 以下のコマンドで立ち上がり，自動でブラウザが立ち上がる．
 立ち上がらない場合は，[http://localhost:3000](http://localhost:3000)にアクセスする．
@@ -21,8 +38,7 @@ npm install
 npm run start
 ```
 
-# react-pdf-ner-annotator
-
+# 以下，元のREADME
 A React component to annotate named entities directly onto a PDF.
 
 [Live demo](https://react-annotator-demo.netlify.app/)
