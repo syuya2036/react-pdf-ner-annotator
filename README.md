@@ -1,3 +1,26 @@
+# 動かし方
+
+デフォルトのdocは以下の場所にある．
+- [react-pdf-ner-annotator](#react-pdf-ner-annotator)
+
+## 1
+```bash
+cd example
+npm install
+npm run build
+```
+するとエラーが起こるが，想定挙動なので次へ．
+
+## 2
+
+以下のコマンドで立ち上がり，自動でブラウザが立ち上がる．
+立ち上がらない場合は，[http://localhost:3000](http://localhost:3000)にアクセスする．
+```bash
+cd ..
+npm install
+npm run start
+```
+
 # react-pdf-ner-annotator
 
 A React component to annotate named entities directly onto a PDF.
@@ -50,3 +73,4 @@ import 'react-pdf-ner-annotator/lib/scss/style.scss';
 
 ## Contributors
 * [Maarten Bloemen](https://github.com/MaartenBloemen)
+
