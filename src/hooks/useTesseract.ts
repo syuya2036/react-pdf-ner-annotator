@@ -1,17 +1,13 @@
-import { useState, useEffect, useCallback } from 'react';
-import { createWorker } from 'tesseract.js';
 import sortBy from 'lodash/sortBy';
-import { OCRResult } from '../interfaces/orc';
+import { useCallback, useEffect, useState } from 'react';
+import { createWorker } from 'tesseract.js';
 import {
 	calculateFontSize,
 	calculateRectangleProperties,
 	calculateTransform,
 	recalculateBoundingBox,
 } from '../helpers/pdfHelpers';
-
-const worker = createWorker({
-	logger: (m) => console.info(m),
-});
+import { OCRResult } from '../interfaces/orc';
 
 const useTesseract = (scale: number, context: CanvasRenderingContext2D) => {
 	const [ocrLoading, setOcrLoading] = useState(false);
@@ -43,38 +39,50 @@ const useTesseract = (scale: number, context: CanvasRenderingContext2D) => {
 	const doOCR = useCallback(
 		async (language = 'eng') => {
 			setOcrLoading(true);
-			await worker.load();
-			await worker.loadLanguage(language);
-			await worker.initialize(language);
-			return worker.recognize(context!.canvas).then(
-				(result) => {
-					setOcrError(undefined);
-					setOcrLoading(false);
-					const unsortedResult = result.data.words.map((word) => {
-						const coords = calculateRectangleProperties(word.bbox);
-						const fontSize = calculateFontSize(coords.width, coords.height, word.text);
-						const fontFamily = word.font_name || 'sans-serif';
-						const transform = calculateTransform(coords.width, fontSize, fontFamily, word.text, context);
-						return {
-							coords,
-							text: word.text,
-							fontSize,
-							fontFamily,
-							transform,
-						};
-					});
-					setOcrResult({
-						confidence: result.data.confidence,
-						ocrWords: sortBy(unsortedResult, ['coords.top', 'coords.left']),
-						baseScale: scale,
-					});
-				},
-				(error) => {
-					setOcrResult(null);
-					setOcrLoading(false);
-					setOcrError(error);
-				},
-			);
+			try {
+				// worker変数をここで定義して初期化する
+				const worker = await createWorker();
+
+				// 言語のロードと初期化
+				await worker.loadLanguage(language);
+				await worker.initialize(language);
+
+				// テキスト認識の実行
+				const result = await worker.recognize(context!.canvas);
+
+				// 結果の処理
+				setOcrError(undefined);
+				setOcrLoading(false);
+				const unsortedResult = result.data.words.map((word) => {
+					const coords = calculateRectangleProperties(word.bbox);
+					const fontSize = calculateFontSize(coords.width, coords.height, word.text);
+					const fontFamily = word.font_name || 'sans-serif';
+					const transform = calculateTransform(coords.width, fontSize, fontFamily, word.text, context);
+					return {
+						coords,
+						text: word.text,
+						fontSize,
+						fontFamily,
+						transform,
+					};
+				});
+
+				setOcrResult({
+					confidence: result.data.confidence,
+					ocrWords: sortBy(unsortedResult, ['coords.top', 'coords.left']),
+					baseScale: scale,
+				});
+
+				// 使い終わったworkerを終了
+				await worker.terminate();
+
+				return result;
+			} catch (error) {
+				setOcrResult(null);
+				setOcrLoading(false);
+				setOcrError(error as string);
+				throw error;
+			}
 		},
 		[scale, context],
 	);

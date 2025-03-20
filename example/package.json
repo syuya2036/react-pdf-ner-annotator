@@ -28,11 +28,12 @@
     "react-scripts": "^4.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom"
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "test": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts test --env=jsdom"
   },
   "devDependencies": {
-    "@types/react-json-tree": "^0.13.0"
+    "@types/react-json-tree": "^0.13.0",
+    "cross-env": "^7.0.3"
   }
 }

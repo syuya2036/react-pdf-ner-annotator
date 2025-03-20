@@ -14,10 +14,17 @@
     "pdfjs-dist": "2.4.456",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intersection-observer": "^9.4.0",
-    "react-router-dom": "^6.4.1",
-    "react-scripts": "^4.0.1",
-    "tesseract.js": "^3.0.3"
+    "react-intersection-observer": "^9.4.3",
+    "react-router-dom": "^6.10.0",
+    "react-scripts": "5.0.1",
+    "tesseract.js": "^4.1.1"
+  },
+  "overrides": {
+    "babel-jest": "26.6.0",
+    "babel-loader": "8.1.0",
+    "jest": "26.6.0",
+    "webpack": "4.44.2",
+    "webpack-dev-server": "3.11.1"
   },
   "scripts": {
     "start-development": "npm start",
@@ -61,19 +68,20 @@
     "NER"
   ],
   "devDependencies": {
-    "@types/lodash": "^4.14.185",
-    "@types/node": "^18.7.20",
+    "@types/lodash": "^4.14.195",
+    "@types/node": "^18.16.1",
     "@types/pdfjs-dist": "^2.10.378",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.38.0",
-    "@typescript-eslint/parser": "^5.38.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
     "copyfiles": "^2.4.1",
+    "cross-env": "^7.0.3",
     "eslint": "^7.11.0",
-    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.7.1",
-    "sass": "^1.55.0",
-    "typescript": "^4.8.3"
+    "prettier": "^2.8.8",
+    "sass": "^1.62.1",
+    "typescript": "4.9.5"
   }
 }
